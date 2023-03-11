@@ -68,14 +68,20 @@ const handlerPut: NextApiHandler = async (req, res) => {
  
 const handlerDelete: NextApiHandler = async (req, res) => {
   const {id} = req.query;
-  
-  await prisma.user.delete({
+
+  const deletedUser = await prisma.user.delete({
     where: {
       id: parseInt(id as string)
     }
+  }).catch(()=> { 
+    res.json({error: 'Usuário não encontrado'});
   });
 
-  res.json({ status: true});
+
+  if(deletedUser) {
+    res.json({ status: true});
+  }
+  
 
 }
 
