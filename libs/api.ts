@@ -32,6 +32,8 @@ export default {
         }
         );
 
+        return users;
+
 
     }
 }
